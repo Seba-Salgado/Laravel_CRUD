@@ -16,3 +16,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+use App\Http\Controllers\ProductosController;
+
+/*
+Route::get('/inicio',[ProductosController::class,'index']);
+
+Route::get('/crear',[ProductosController::class,'create']);
+
+Route::get('/actualizar',[ProductosController::class,'update']);
+
+Route::get('/insertar',[ProductosController::class,'store']);
+
+Route::get('/borrar',[ProductosController::class,'destroy']);
+*/
+
+ 
+Route::resource('/productos', ProductosController::class);
