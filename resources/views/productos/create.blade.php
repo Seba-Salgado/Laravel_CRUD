@@ -7,55 +7,58 @@ Insertar nuevo Registro.
 
 @section('contenido')
 
-    <form method='post' action='/productos'>
+    <!-- <form method='post' action='/productos'> -->
+    {!! Form::open(['url' => '/productos', 'method' => 'post']) !!}
     @csrf
     <table>
         <tr>
             <td>
-                Nombre
+              {!! Form::label('NombreArticulo', 'Nombre') !!}
             </td>
             <td>
-                <input type='text' name='NombreArticulo'>
+                <!-- <input type='text' name='NombreArticulo'> -->
+               {!! Form::text('NombreArticulo')  !!}
                
             </td>
         </tr>
 
         <tr>
             <td>
-                Seccion
+             {!! Form::label('Seccion', 'Sección') !!}
             </td>
             <td>
-                <input type='text' name='Seccion'>
+                <!-- <input type='text' name='Seccion'> -->
+                {!! Form::text('Seccion')  !!}
                 
             </td>
         </tr>
 
         <tr>
             <td>
-                Precio
+            {!! Form::label('Precio', 'Precio') !!}
             </td>
             <td>
-                <input type='text' name='Precio'>
+            {!! Form::number('Precio', 'value')  !!}
                 
             </td>
         </tr>
 
         <tr>
             <td>
-                Fecha
+            {!! Form::label('Fecha', 'Fecha') !!}
             </td>
             <td>
-                <input type='text' name='Fecha'>
+            {!! Form::date('Fecha', \Carbon\Carbon::now()) !!}
                 
             </td>
         </tr>
 
         <tr>
             <td>
-                Pais Origen
+            {!! Form::label('PaisOrigen', 'PaisOrigen') !!}
             </td>
             <td>
-                <input type='text' name='PaisOrigen'>
+            {!! Form::text('PaisOrigen')  !!}
                 
             </td>
         </tr>
@@ -65,15 +68,27 @@ Insertar nuevo Registro.
 
         <tr>
             <td>
-                <input type='submit' name='enviar' value='Enviar'>
+            {!! Form::submit('Enviar') !!}
             </td>
 
             <td>
-                <input type='reset' name='Borrar' value='Borrar'>
+            {!! Form::reset('Limpiar Form') !!}
             </td>
         </tr>
     </table>
-</form>
+    {!! Form::close() !!}
+
+<!-- mensaje de error invocando a la variable $error de laravel-->
+
+@if(count($errors)>0)
+    <ul>
+    @foreach($errors->all() as $error)
+       <li> {{$error}}</li>
+    @endforeach
+</ul>
+@endif
+
+
 
 @endsection
 

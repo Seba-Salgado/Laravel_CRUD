@@ -7,7 +7,8 @@ Editar Registro.
 
 @section('contenido')
 
-    <form method='post' action='/productos/{{$producto->id}}'>
+    {!! Form::model($producto,['route'=>['productos.update',$producto->id]]) !!}
+    <!-- <form method='post' action='/productos/{{$producto->id}}'> -->
     @csrf
     <input type='hidden' name='_method' value='PUT'>
     <table>
@@ -70,11 +71,21 @@ Editar Registro.
             </td>
 
             <td>
-                <input type='reset' name='Borrar' value='Borrar'>
+                <input type='reset' name='limpiar' value='Limpiar Formulario'>
             </td>
         </tr>
     </table>
-</form>
+    {!! Form::close() !!}
+
+    {!! Form::open(['route'=>['productos.destroy',$producto->id]]) !!}
+<!-- <form method='post' action='/productos/{{$producto->id}}'> -->
+    @csrf
+    <input type='hidden' name='_method' value='DELETE'>
+
+    <input type='submit' name='delete' value='Borrar'>
+    {!! Form::close() !!}
+<!-- </form> -->
+
 
 @endsection
 

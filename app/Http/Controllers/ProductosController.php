@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Producto;
 
+use App\Http\Requests\createProductosRequest;  // para encontrar createProductosRequest para validacion
+
 class ProductosController extends Controller
 {
     /**
@@ -39,9 +41,17 @@ class ProductosController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    public function store(Request $request)
+       
+    public function store(createProductosRequest $request)  // la validacion viene de createProductosRequest
     {
-        //
+        // validacion 
+        /* comentamos la validacion para usar el metodo request desde createProductosRequest
+        $this->validate($request,[  'NombreArticulo'=>'required',
+                                    'Seccion'=>'required',
+                                    'Precio'=>'required',
+                                    'Fecha'=>'required',
+                                    'PaisOrigen'=>'required']);  */
+
         $producto=new Producto;
         
         $producto->NombreArticulo=$request->NombreArticulo;
@@ -49,7 +59,6 @@ class ProductosController extends Controller
         $producto->Precio=$request->Precio;
         $producto->Fecha=$request->Fecha;
         $producto->PaisOrigen=$request->PaisOrigen;
-
 
         $producto->save();
     }
@@ -108,6 +117,9 @@ class ProductosController extends Controller
     public function destroy($id)
     {
         //
-        return view('productos.delete');
+        $producto=Producto::findOrFail($id);      //definimos id a buscar
+        $producto->delete(); // borramos
+
+        return redirect('/productos');  //redirije al index
     }
 }
