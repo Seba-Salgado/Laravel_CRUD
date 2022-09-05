@@ -10,7 +10,8 @@ Editar Registro.
     {!! Form::model($producto,['route'=>['productos.update',$producto->id]]) !!}
     <!-- <form method='post' action='/productos/{{$producto->id}}'> -->
     @csrf
-    <input type='hidden' name='_method' value='PUT'>
+    <!-- Este input hidden ya lo necesitamos con collective -->
+    <!-- <input type='hidden' name='_method' value='PUT'> -->
     <table>
         <tr>
             <td>
@@ -80,7 +81,8 @@ Editar Registro.
     {!! Form::open(['route'=>['productos.destroy',$producto->id]]) !!}
 <!-- <form method='post' action='/productos/{{$producto->id}}'> -->
     @csrf
-    <input type='hidden' name='_method' value='DELETE'>
+    <!-- Estos inputs hidden, utilizando collective no los necesitamos! -->
+    <!-- <input type='hidden' name='_method' value='DELETE'> -->
 
     <input type='submit' name='delete' value='Borrar'>
     {!! Form::close() !!}

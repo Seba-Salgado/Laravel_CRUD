@@ -52,6 +52,7 @@ class ProductosController extends Controller
                                     'Fecha'=>'required',
                                     'PaisOrigen'=>'required']);  */
 
+        /* comentamos este metodo para hacer request all mas abajo
         $producto=new Producto;
         
         $producto->NombreArticulo=$request->NombreArticulo;
@@ -61,6 +62,30 @@ class ProductosController extends Controller
         $producto->PaisOrigen=$request->PaisOrigen;
 
         $producto->save();
+        */
+
+        //nuevo metodo mas senillo que incluye guardar imagenes
+        $entrada=$request->all();
+
+        //imagen:
+
+            //se busca el file subido
+        if($archivo=$request->file('file')){
+
+            //buscamos el nombre original del archivo
+            $nombre=$archivo->getClientOriginalName();
+
+            //movemos el archivo a la carpeta images
+            $archivo->move('images',$nombre);
+            
+            //creamos la ruta para luego almacenar en la base de datos
+            $entrada['ruta']=$nombre;
+        }
+
+        //ingresamos el producto a la base de datos, ruta de la imagen incluida.
+        Producto::create($entrada);
+
+
     }
 
     /**

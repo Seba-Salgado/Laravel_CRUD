@@ -14,5 +14,5 @@ class Producto extends Model
 
     use SoftDeletes;
     
-    protected $fillable = ['NombreArticulo','Seccion','Precio','Fecha','PaisOrigen'];
+    protected $fillable = ['NombreArticulo','Seccion','Precio','Fecha','PaisOrigen','ruta'];
 }

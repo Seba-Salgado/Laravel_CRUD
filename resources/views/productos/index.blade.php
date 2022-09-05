@@ -13,7 +13,8 @@ Leer Registros.
 {{$producto->Seccion}}&nbsp; 
 {{$producto->Precio}}&nbsp;
 {{$producto->Fecha}}&nbsp;
-{{$producto->PaisOrigen}}
+{{$producto->PaisOrigen}}&nbsp;
+<img src="/images/{{$producto->ruta}}" width='30' />
 
 </li>
 @endforeach

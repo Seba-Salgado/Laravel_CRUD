@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,23 +16,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
 
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-use App\Http\Controllers\ProductosController;
-
-/*
-Route::get('/inicio',[ProductosController::class,'index']);
-
-Route::get('/crear',[ProductosController::class,'create']);
-
-Route::get('/actualizar',[ProductosController::class,'update']);
-
-Route::get('/insertar',[ProductosController::class,'store']);
-
-Route::get('/borrar',[ProductosController::class,'destroy']);
-*/
-
- 
-Route::resource('/productos', ProductosController::class);
+require __DIR__.'/auth.php';

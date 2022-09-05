@@ -8,7 +8,7 @@ Insertar nuevo Registro.
 @section('contenido')
 
     <!-- <form method='post' action='/productos'> -->
-    {!! Form::open(['url' => '/productos', 'method' => 'post']) !!}
+    {!! Form::open(['url' => '/productos', 'method' => 'post','files'=>true]) !!}
     @csrf
     <table>
         <tr>
@@ -63,6 +63,14 @@ Insertar nuevo Registro.
             </td>
         </tr>
 
+        <tr>
+            <td>
+                Subir imagen
+            </td>
+            <td>
+                {!! Form::file('file') !!}
+            </td>
+        </tr>
         
 
 
